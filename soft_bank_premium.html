@@ -524,6 +524,41 @@
         </div>
     </section>
 
+    <section id="simulador" aria-labelledby="simulator-title" class="mx-auto max-w-3xl px-4 pb-16">
+        <div class="glass-panel space-y-5 rounded-3xl p-6 md:p-8">
+            <h2 id="simulator-title" class="text-3xl font-medium text-white">Simule o valor líquido</h2>
+            <p class="text-textMuted">Use as taxas ilustrativas do site para comparar uma venda em Pix, débito e crédito à vista. Nenhum pagamento é realizado.</p>
+            <form id="fee-form" class="space-y-4" novalidate hidden>
+                <div>
+                    <label class="block font-medium text-white" for="fee-amount">Valor da venda (R$)</label>
+                    <input id="fee-amount" required type="text" inputmode="decimal" maxlength="14"
+                           aria-describedby="fee-help" placeholder="100,00"
+                           class="mt-2 min-h-12 w-full max-w-xs rounded-xl border border-white/25 bg-surface px-3 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent">
+                    <p id="fee-help" class="mt-2 text-sm text-textMuted">De R$ 0,01 a R$ 100.000,00, sem separador de milhar.</p>
+                </div>
+                <button type="submit" class="min-h-12 rounded-xl bg-accent px-5 font-bold text-background focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">
+                    Comparar taxas
+                </button>
+                <p id="fee-error" role="alert" class="text-rose-300"></p>
+            </form>
+            <p id="fee-status" role="status" class="text-textMuted"></p>
+            <div id="fee-results" class="overflow-x-auto" hidden>
+                <table class="w-full text-left tabular-nums">
+                    <caption class="mb-2 text-left text-textMuted">Estimativa por forma de pagamento</caption>
+                    <thead class="border-b border-white/20 text-white">
+                        <tr>
+                            <th scope="col" class="p-2">Método</th>
+                            <th scope="col" class="p-2">Taxa</th>
+                            <th scope="col" class="p-2">Líquido</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fee-rows"></tbody>
+                </table>
+            </div>
+            <noscript><p>Ative o JavaScript para usar o simulador.</p></noscript>
+        </div>
+    </section>
+
     <!-- Call to Action (New Section) -->
     <section id="pedir" class="py-20 px-4 reveal">
         <div class="max-w-5xl mx-auto glass-panel rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
@@ -594,6 +629,7 @@
         </div>
     </footer>
 
+    <script type="module" src="fees.mjs"></script>
     <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
