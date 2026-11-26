@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2")
+    format("woff2");
+}
+
+body {
+  background-color: #040709;
+  color: #f9f6ec;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Subtle Grain/Noise Overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.03;
+  background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+}
+
+/* Mouse tracking glow */
+.mouse-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(
+    circle,
+    rgba(154, 234, 98, 0.04) 0%,
+    transparent 50%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  will-change: transform;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glass Panels */
+.glass-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(24, 33, 38, 0.6) 0%,
+    rgba(13, 19, 23, 0.8) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-nav {
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 20, 0.7) 0%,
+    rgba(10, 10, 10, 0.9) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0px 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+/* 3D Tilt */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition:
+    transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.3s ease;
+  will-change: transform;
+}
+.tilt-content {
+  transform: translateZ(30px);
+}
+
+/* Reveal Animations */
+.reveal {
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-enabled .reveal:not(.active):not(:focus-within):not(:target) {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 {
+  transition-delay: 0.15s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.3s;
+}
+
+::selection {
+  background: #9aea62;
+  color: #040709;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #ffffff, #9aa5b1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-hidden:not(:focus-within) {
+  transform: translate(-50%, 150%);
+}
+
+.terminal-mockup {
+  transform: rotateX(15deg) rotateY(-10deg);
+}
+.phone-mockup {
+  transform: rotateY(-15deg) rotateX(5deg);
+}
+.terminal-grid {
+  background-image: radial-gradient(
+    circle at center,
+    white 1px,
+    transparent 1px
+  );
+  background-size: 4px 4px;
+}
+
+.faq-btn:not([aria-expanded="true"]) .faq-minus,
+.faq-btn[aria-expanded="true"] .faq-icon {
+  display: none;
+}
+.faq-btn[aria-expanded="true"] .faq-icon-container {
+  background-color: rgb(255 255 255 / 10%);
+}
+.glass-panel:has(.faq-btn[aria-expanded="true"]) {
+  border-color: rgb(255 255 255 / 20%);
+}
+.faq-btn:focus-visible {
+  outline-offset: -4px;
+}
+.reveal:has(.marquee-control input:checked) .animate-marquee {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-enabled .reveal:not(.active):not(:focus-within):not(:target) {
+    opacity: 1;
+    transform: none;
+  }
+  .mouse-glow {
+    display: none;
+  }
+  .tilt-card,
+  .tilt-content {
+    transform: none !important;
+  }
+  .nav-hidden:not(:focus-within) {
+    transform: translateX(-50%);
+  }
+  .animate-marquee {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+  }
+  .animate-marquee [aria-hidden="true"]:not(i) {
+    display: none;
+  }
+  .marquee-control {
+    display: none;
+  }
+}
