@@ -1,0 +1,10 @@
+**
+!Dockerfile
+!package.json
+!package-lock.json
+!vite.config.js
+!postcss.config.js
+!tailwind.config.js
+!nginx.conf
+!src/
+!src/**
