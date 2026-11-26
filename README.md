@@ -24,7 +24,8 @@ cannot be activated.
 
 ## Develop and verify
 
-Use Node.js 24 LTS (Node.js 22.12+ is also supported), npm and, optionally, Make.
+Use Node.js 24.8+ on the 24 LTS line (or Node.js 22.22+ on the 22 LTS line),
+npm and, optionally, Make.
 On Linux machines without Chromium system packages, substitute
 `npx playwright install --with-deps chromium` for the browser install.
 
